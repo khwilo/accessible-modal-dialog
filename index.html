@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>A11y | Accessible Dialog</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <h1 id="logo">RN</h1>
+        <div class="content-right">
+          <p>Subscribe to our newsletter</p>
+          <button type="button" id="subscribe">Subscribe</button>
+        </div>
+      </header>
+      <main class="main">
+        <div class="main__content container">
+          <div class="cards">
+            <div class="card">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptatem doloribus excepturi ipsam dolore qui quibusdam
+                molestias nam sed nisi, tenetur quae enim! Ipsa repellat illum
+                omnis natus quo, numquam delectus.Labore harum, aspernatur
+                repellat dignissimos facere veritatis est obcaecati autem in
+                laborum quasi provident. Deleniti fugiat distinctio non
+                voluptatum fugit asperiores ex! Eaque, consequatur sequi nostrum
+                reiciendis repellat ea facere?
+              </p>
+            </div>
+            <div class="card">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptatem doloribus excepturi ipsam dolore qui quibusdam
+                molestias nam sed nisi, tenetur quae enim! Ipsa repellat illum
+                omnis natus quo, numquam delectus.Labore harum, aspernatur
+                repellat dignissimos facere veritatis est obcaecati autem in
+                laborum quasi provident. Deleniti fugiat distinctio non
+                voluptatum fugit asperiores ex! Eaque, consequatur sequi nostrum
+                reiciendis repellat ea facere?
+              </p>
+            </div>
+            <div class="card">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptatem doloribus excepturi ipsam dolore qui quibusdam
+                molestias nam sed nisi, tenetur quae enim! Ipsa repellat illum
+                omnis natus quo, numquam delectus.Labore harum, aspernatur
+                repellat dignissimos facere veritatis est obcaecati autem in
+                laborum quasi provident. Deleniti fugiat distinctio non
+                voluptatum fugit asperiores ex! Eaque, consequatur sequi nostrum
+                reiciendis repellat ea facere?
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="dialog">
+          <div class="dialog__backdrop"></div>
+          <div class="dialog__content">
+            <div class="close">
+              <button id="closeBtn">close</button>
+            </div>
+            <h2 class="newsletter-title">React Native Newsletter</h2>
+            <p>Sign up to get weekly news about React Native in your inbox</p>
+            <form class="form">
+              <div class="form__group">
+                <label for="email">Email address:</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  class="form__control"
+                />
+              </div>
+              <button type="submit" id="submitBtn">Submit</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="feedback container">
+          Did you find the content interesting?
+          <form action="form feedback">
+            <div class="form__group">
+              <input
+                type="checkbox"
+                name="yes"
+                id="yes"
+                class="form__control"
+              />
+              <label for="yes">Yes</label>
+            </div>
+            <div class="form__group">
+              <input type="checkbox" name="no" id="no" class="form__control" />
+              <label for="no">No</label>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer class="footer">
+        <p>&copy; 2020</p>
+        <p>Made by <span class="name">Khwilo Kabaka</span></p>
+      </footer>
+    </div>
+
+    <script src="./js/app.js"></script>
+  </body>
+</html>
