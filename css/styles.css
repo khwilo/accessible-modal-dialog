@@ -99,10 +99,9 @@ button {
 
 .dialog__content {
   position: fixed;
-  top: 8rem;
-  bottom: 8rem;
-  right: 10%;
-  left: 10%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   overflow: auto;
   border: 2px solid black;
   display: inline-flex;
@@ -148,7 +147,6 @@ button {
   bottom: 0;
   left: 0;
   background-color: hsla(0, 0%, 0%, 0.5);
-  z-index: -1;
 }
 
 /* END - DIALOG */
