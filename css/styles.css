@@ -110,6 +110,10 @@ button {
   background-color: #ffffff;
 }
 
+.dialog__content *:focus {
+  outline: 2px solid black;
+}
+
 .close {
   margin-left: auto;
 }
@@ -162,6 +166,15 @@ button {
 
 .feedback .form__group label {
   font-weight: 700;
+}
+
+.feedback-submitBtn {
+  background-color: #5e5eff;
+  color: #fcfcfc;
+  box-shadow: 2px 2px 2px gray;
+  font-size: 0.8em;
+  font-weight: 700;
+  margin-top: 0.5rem;
 }
 
 /* END - FEEDBACK */
