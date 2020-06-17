@@ -12,7 +12,7 @@
         <h1 id="logo">RN</h1>
         <div class="content-right">
           <p>Subscribe to our newsletter</p>
-          <button type="button" id="subscribe">Subscribe</button>
+          <button type="button" id="subscribeBtn">Subscribe</button>
         </div>
       </header>
       <main class="main">
@@ -56,9 +56,11 @@
             </div>
           </div>
         </div>
-        <div class="dialog">
-          <div class="dialog__backdrop"></div>
-          <div class="dialog__content">
+
+        <!-- START: modal -->
+        <div class="modal">
+          <div class="modal__backdrop"></div>
+          <div class="modal__content">
             <div class="close">
               <button id="closeBtn">close</button>
             </div>
@@ -78,6 +80,7 @@
             </form>
           </div>
         </div>
+        <!-- END: modal -->
 
         <div class="feedback container">
           Did you find the content interesting?
