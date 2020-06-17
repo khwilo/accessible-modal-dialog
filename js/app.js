@@ -24,6 +24,12 @@ function openDialogBox() {
   modalBackdrop.addEventListener('click', closeDialogBox);
 }
 
+function closeDialogBox() {
+  modal.style.display = 'none';
+  modalBackdrop.style.display = 'none';
+  elementWithPriorFocus.focus();
+}
+
 function keyDown(event, firstTabStop, lastTabStop) {
   // Check if the keyboard key is the ESC key
   if (event.keyCode === 27) {
@@ -44,12 +50,6 @@ function keyDown(event, firstTabStop, lastTabStop) {
       }
     }
   }
-}
-
-function closeDialogBox() {
-  modal.style.display = 'none';
-  modalBackdrop.style.display = 'none';
-  elementWithPriorFocus.focus();
 }
 
 const getFirstAndLastTabAbleElement = (wrapper) => {
