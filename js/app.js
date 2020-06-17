@@ -1,60 +1,65 @@
-const subscribeBtn = document.getElementById('subscribe');
-const dialog = document.querySelector('.dialog'); /* Dialog box wrapper */
-const dialogBox = document.querySelector('.dialog__content'); /* Dialog box */
-const dialogBackdrop = document.querySelector('.dialog__backdrop');
+const subscribeBtn = document.getElementById('subscribeBtn');
+const modal = document.querySelector('.modal'); /* modal wrapper */
+const modalContent = document.querySelector('.modal__content');
+const modalBackdrop = document.querySelector('.modal__backdrop');
 let elementWithPriorFocus;
 
 subscribeBtn.addEventListener('click', openDialogBox);
 
 function openDialogBox() {
-  // Tracks the element having focus before the dialog box is opened
+  const closeBtn = document.getElementById('closeBtn');
+  const { firstTabStop, lastTabStop } = getFirstAndLastTabAbleElement(
+    modalContent
+  );
   elementWithPriorFocus = document.activeElement;
 
-  const closeBtn = document.getElementById('closeBtn');
+  modal.style.display = 'block';
+  modalBackdrop.style.display = 'block';
+  firstTabStop.focus();
 
-  dialogBox.addEventListener('keydown', keydownEvent);
+  modal.addEventListener('keydown', (event) =>
+    keyDown(event, firstTabStop, lastTabStop)
+  );
   closeBtn.addEventListener('click', closeDialogBox);
-  dialogBackdrop.addEventListener('click', closeDialogBox);
+  modalBackdrop.addEventListener('click', closeDialogBox);
+}
 
-  const focusableElementsString =
-    'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
-  let focusableElements = dialogBox.querySelectorAll(focusableElementsString);
-  focusableElements = Array.prototype.slice.call(focusableElements);
+function keyDown(event, firstTabStop, lastTabStop) {
+  // Check if the keyboard key is the ESC key
+  if (event.keyCode === 27) {
+    closeDialogBox();
+  }
 
-  let firstTabStop = focusableElements[0];
-  let lastTabStop = focusableElements[focusableElements.length - 1];
-
-  dialog.style.display = 'block';
-  dialogBackdrop.style.display = 'block';
-
-  firstTabStop.focus(); // Set the first element in the dialog box to focus
-
-  function keydownEvent(event) {
-    if (event.keyCode === 27) {
-      // Check to see if the user pressed the 'ESC' key
-      closeDialogBox();
-    }
-
-    if (event.keyCode === 9) {
-      // Check to see if the user pressed the TAB key
-      // Check to see if the user pressed TAB + Shift key
-      if (event.shiftKey) {
-        if (document.activeElement === firstTabStop) {
-          event.preventDefault();
-          lastTabStop.focus();
-        }
-      } else {
-        if (document.activeElement === lastTabStop) {
-          event.preventDefault();
-          firstTabStop.focus();
-        }
+  // Check if the keyboard key is the TAB key
+  if (event.keyCode === 9) {
+    if (event.shiftKey) {
+      if (document.activeElement === firstTabStop) {
+        event.preventDefault();
+        lastTabStop.focus();
+      }
+    } else {
+      if (document.activeElement === lastTabStop) {
+        event.preventDefault();
+        firstTabStop.focus();
       }
     }
   }
 }
 
 function closeDialogBox() {
-  dialog.style.display = 'none';
-  dialogBackdrop.style.display = 'none';
+  modal.style.display = 'none';
+  modalBackdrop.style.display = 'none';
   elementWithPriorFocus.focus();
 }
+
+const getFirstAndLastTabAbleElement = (wrapper) => {
+  const focusableElementsString =
+    'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+  let focusableElements = wrapper.querySelectorAll(focusableElementsString);
+  focusableElements = Array.prototype.slice.call(focusableElements);
+
+  return {
+    firstTabStop: focusableElements[0],
+    lastTabStop: focusableElements[focusableElements.length - 1],
+  };
+};
