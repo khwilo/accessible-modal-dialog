@@ -14,9 +14,4 @@ When the modal dialog is open, one can tab through other contents outside the mo
 
 ![Alt_Text](https://github.com/khwilo/accessible-modal-dialog/blob/master/demos/accessible-modal-after.gif)
 
-Now, other contents outside the modal cannot be accessed when using the **TAB** key. When the modal dialog is opened, it stays in focus.
-To close the modal dialog, one can click on the **close** button, press on the **esc** key or click outside the modal.
-
-Source: [A11y Solutions - Modals](https://a11y-solutions.stevenwoodson.com/solutions/focus/modals/).
-
-I am on the process of writing a follow up tutorial to show how the solution was arrived at.
+Now, other contents outside the modal cannot be accessed when using the **TAB** key. When the modal dialog is opened, it stays in focus. To close the modal dialog, one can click on the **close** button, press on the **esc** key or click outside the modal.
