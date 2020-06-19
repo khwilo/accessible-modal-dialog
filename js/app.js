@@ -4,62 +4,70 @@ const modalContent = document.querySelector('.modal__content');
 const modalBackdrop = document.querySelector('.modal__backdrop');
 let elementWithPriorFocus;
 
-subscribeBtn.addEventListener('click', openDialogBox);
+subscribeBtn.addEventListener('click', openModal);
 
-function openDialogBox() {
+function openModal() {
   const closeBtn = document.getElementById('closeBtn');
-  const { firstTabStop, lastTabStop } = getFirstAndLastTabAbleElement(
-    modalContent
-  );
+  const {
+    firstFocusableElement: firstTabbedElement,
+    lastFocusableElement: lastTabbedElement,
+  } = getFirstAndLastFocusableElements(modalContent);
   elementWithPriorFocus = document.activeElement;
 
   modal.style.display = 'block';
   modalBackdrop.style.display = 'block';
-  firstTabStop.focus();
+  firstTabbedElement.focus();
 
   modal.addEventListener('keydown', (event) =>
-    keyDown(event, firstTabStop, lastTabStop)
+    handleKeyDown(event, firstTabbedElement, lastTabbedElement)
   );
-  closeBtn.addEventListener('click', closeDialogBox);
-  modalBackdrop.addEventListener('click', closeDialogBox);
+  closeBtn.addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', closeModal);
 }
 
-function closeDialogBox() {
+function closeModal() {
   modal.style.display = 'none';
   modalBackdrop.style.display = 'none';
   elementWithPriorFocus.focus();
 }
 
-function keyDown(event, firstTabStop, lastTabStop) {
-  // Check if the keyboard key is the ESC key
-  if (event.keyCode === 27) {
-    closeDialogBox();
-  }
-
-  // Check if the keyboard key is the TAB key
-  if (event.keyCode === 9) {
-    if (event.shiftKey) {
-      if (document.activeElement === firstTabStop) {
-        event.preventDefault();
-        lastTabStop.focus();
-      }
-    } else {
-      if (document.activeElement === lastTabStop) {
-        event.preventDefault();
-        firstTabStop.focus();
-      }
-    }
-  }
-}
-
-const getFirstAndLastTabAbleElement = (wrapper) => {
-  const focusableElementsString =
+const getFirstAndLastFocusableElements = (wrapper) => {
+  const focusableElements =
     'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
-  let focusableElements = wrapper.querySelectorAll(focusableElementsString);
-  focusableElements = Array.prototype.slice.call(focusableElements);
+  const wrapperFocusableElements = wrapper.querySelectorAll(focusableElements);
+  const wrapperFocusableElementsList = Array.prototype.slice.call(
+    wrapperFocusableElements
+  );
 
   return {
-    firstTabStop: focusableElements[0],
-    lastTabStop: focusableElements[focusableElements.length - 1],
+    firstFocusableElement: wrapperFocusableElementsList[0],
+    lastFocusableElement:
+      wrapperFocusableElementsList[wrapperFocusableElementsList.length - 1],
   };
 };
+
+function handleKeyDown(event, firstFocusableElement, lastFocusableElement) {
+  const ESC_KEY = 27;
+  const TAB_KEY = 9;
+
+  switch (event.keyCode) {
+    case TAB_KEY:
+      if (event.shiftKey) {
+        if (document.activeElement === firstFocusableElement) {
+          event.preventDefault();
+          lastFocusableElement.focus();
+        }
+      } else {
+        if (document.activeElement === lastFocusableElement) {
+          event.preventDefault();
+          firstFocusableElement.focus();
+        }
+      }
+      break;
+    case ESC_KEY:
+      closeModal();
+      break;
+    default:
+      break;
+  }
+}
